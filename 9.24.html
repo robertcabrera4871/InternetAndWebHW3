@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>9.22</title>
+    </head>
+    <script>
+        var correctAnswers = ["Very good!", "Excellent!", "Nice Work!", "Keep up the good Work!"]
+        var incorrectAnswers = ["No. Please try again.", "Wrong. Try once more.", "Don't give up!", "No. Keep trying."]
+        var firstNum = 0;
+        var secondNum = 0;
+        var max  = 11;
+        var numCorrect = 0;
+        var questionNo = 0;
+        window.onload = randomQuestion
+        
+        function checkAnswer(){
+            var attempt = document.getElementById("answer").value
+            var answer = firstNum * secondNum
+            if(attempt == answer){
+                document.getElementById("result").innerText = randomResponse(true)
+                numCorrect++
+                randomQuestion()
+            } else{
+                document.getElementById("result").innerText = randomResponse(false)
+            }
+            questionNo++;
+        } 
+        function randomQuestion(){
+            firstNum = Math.floor(Math.random() * max)
+            secondNum =  Math.floor(Math.random() * max)
+            document.getElementById("question").innerText = "What is " + firstNum + " * " + secondNum + "?"
+        }
+        function randomResponse(isCorrect){
+            var random = Math.floor(Math.random() * 4)
+            if(isCorrect){
+                return correctAnswers[random]
+            } else{
+                return incorrectAnswers[random]
+            }
+
+        }
+    </script>
+    <body>
+        <form method="POST">
+            <p id='question'></p>
+            <input type="number" id="answer">
+            <input type="button" onclick="checkAnswer()" value="Submit Answer"></input>
+            <p id="result"></p>
+        </form>
+    </body>
+</html>

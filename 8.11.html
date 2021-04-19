@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>8.11</title>
+    </head>
+    <script>
+        var productNum = 0
+        var quantity = 0
+        var totalSales = 0
+        var end = false
+
+        while(!end){
+            var productNum = parseInt(prompt("Enter the product number. Enter -1 to exit"))
+            if(productNum == -1){
+                end = true
+            }
+            else{
+            quantity = parseInt(prompt("Enter the quantity"))
+            
+            switch(productNum){
+            case 1: totalSales += (2.98 * quantity); break;
+            case 2: totalSales += (4.50 * quantity); break;
+            case 3: totalSales += (9.98 * quantity); break;
+            case 4: totalSales += (4.49 * quantity); break;
+            case 5: totalSales += (6.87 * quantity); break;
+            default: alert("Input format incorrect or non exisistent product")
+              }
+             }
+        }
+
+        document.writeln("total sales: " + totalSales)
+       
+       
+    </script>
+</html>

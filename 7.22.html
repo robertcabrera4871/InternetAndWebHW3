@@ -3,16 +3,18 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>7.23</title>
+        <title>7.22</title>
     </head>
     <script>
-        var message = prompt("Please enter your message (4 digits) to decyrpt")
+        var message = prompt("Please enter your message (4 digits)")
         var numbers = new Array(4);
         for(var i = 0; i < numbers.length; i++){
             numbers[i] = parseInt(message.charAt(i))
         }
 
-      
+        for(var i = 0; i < numbers.length; i++){
+            numbers[i] = (numbers[i] + 7) % 10
+        }
 
         var temp = numbers[0]
         numbers[0] = numbers[2]
@@ -22,14 +24,9 @@
         numbers[1] = numbers[3]
         numbers[3] = temp
 
-        for(var i = 0; i < numbers.length; i++){
-            numbers[i] = (numbers[i] + 3) % 10
-        }
-
-        document.writeln("The decrypted number is ")
+        document.writeln("The encrypted number is ")
         for(var i = 0; i < numbers.length; i++){
            document.writeln(numbers[i])
         }
-
     </script>
 </html>

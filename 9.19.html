@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>9.19</title>
+</head>
+<script>
+    function setTextArea() {
+        var primeString = ""
+        for (var i = 1; i < 10000; i++) {
+            if (checkPrime(i)) {
+                primeString += i + ","
+            }
+        }
+        document.getElementById("allPrime").value = primeString;
+    }
+    function setAnswer1() {
+        var test = document.getElementById("test").value
+        var result = document.getElementById("answer1")
+        if (checkPrime(test)) {
+            result.innerText = test + " is prime"
+        } else {
+            result.innerText = test + " is not prime"
+        }
+
+    }
+    function setAnswer2() {
+        var test = document.getElementById("test2").value
+        var result = document.getElementById("answer2")
+        if (checkPrimeSqr(test)) {
+            result.innerText = test + " is prime"
+        } else {
+            result.innerText = test + " is not prime"
+        }
+    }
+    function checkPrime(num) {
+        var divisNum = 0
+        var isPrime = false
+        for (i = 1; i <= num; i++) {
+            if (num % i == 0) {
+                divisNum++;
+            }
+        }
+        if (divisNum == 2) {
+            isPrime = true
+        }
+        return isPrime
+    }
+    function checkPrimeSqr(num) {
+        var divisNum = 0
+        var isPrime = true
+        var sqrNum = Math.sqrt(num)
+
+        if (num <= 1) {
+            isPrime = false;
+        } else if (num <= 3) {
+            isPrime = true;
+        } else {
+            for (var i = 2; i <= sqrNum; i++) {
+                if (num % i == 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+        }
+        return isPrime;
+
+    }
+
+
+</script>
+
+<body>
+    <form method="POST">
+        Enter number <input type="number" id="test">
+        <input type="button" value="Calculate if Prime" onclick="setAnswer1()">
+        <br><br>
+        <div id="answer1"></div>
+        All Primes<textarea id="allPrime"></textarea>
+        <input type="button" value="Find all Primes" onclick="setTextArea()"></button>
+        <br><br>
+        Enter number <input type="number" id="test2">
+        <input type="button" value="Calculate if Prime" onclick="setAnswer2()">
+        <div id="answer2"></div>
+
+    </form>
+
+</body>
+
+</html>

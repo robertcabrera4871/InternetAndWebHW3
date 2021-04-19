@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>9.22</title>
+    </head>
+    <script>
+        var firstNum = 0;
+        var secondNum = 0;
+        var max  = 11;
+        window.onload = randomQuestion
+        
+        function checkAnswer(){
+            var attempt = document.getElementById("answer").value
+            var answer = firstNum * secondNum
+            if(attempt == answer){
+                document.getElementById("result").innerText = "Very Good!"
+                randomQuestion()
+            } else{
+                document.getElementById("result").innerText = "No. Please try again."
+            }
+        } 
+        function randomQuestion(){
+            firstNum = Math.floor(Math.random() * max)
+            secondNum =  Math.floor(Math.random() * max)
+            document.getElementById("question").innerText = "What is " + firstNum + " * " + secondNum + "?"
+        }
+    </script>
+    <body>
+        <form method="POST">
+            <p id='question'></p>
+            <input type="number" id="answer">
+            <input type="button" onclick="checkAnswer()" value="Submit Answer"></input>
+            <p id="result"></p>
+        </form>
+    </body>
+</html>
