@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>9.27</title>
+</head>
+<script>
+    var correctAnswers = ["Very good!", "Excellent!", "Nice Work!", "Keep up the good Work!"]
+    var incorrectAnswers = ["No. Please try again.", "Wrong. Try once more.", "Don't give up!", "No. Keep trying."]
+    var firstNum = 0
+    var secondNum = 0
+    var numCorrect = 0
+    var questionNo = 1
+    var gradeLevel = prompt("Which grade level would you like? Enter 1 or 2")
+    var arithmetic = 1
+    var arithmeticActual = 1
+    var max = 0
+
+    if (gradeLevel == 1) {
+        max = 11
+    } else {
+        max = 1001
+    }
+    window.onload = function () {
+        randomQuestion(arithmetic)
+    }
+
+
+    function checkAnswer() {
+        if (questionNo == 10) {
+            calculateScore()
+            numCorrect = 0
+            questionNo = 0
+        }
+        var attempt = document.getElementById("answer").value
+        var answer = 0
+        switch(arithmeticActual){
+            case 1: answer = firstNum + secondNum; break;
+            case 2: answer = firstNum - secondNum; break;
+            case 3: answer = firstNum * secondNum; break;
+            case 4: answer = ((firstNum / secondNum) * 10) / 10; break;
+        }
+        if (attempt == answer) {
+            document.getElementById("result").innerText = randomResponse(true)
+            numCorrect++
+            randomQuestion(arithmetic)
+        } else {
+            document.getElementById("result").innerText = randomResponse(false)
+        }
+        questionNo++;
+    }
+    function randomQuestion(arithmetic) {
+        firstNum = Math.floor(Math.random() * max)
+        secondNum = Math.floor(Math.random() * max)
+        if (arithmetic == 5) {
+            arithmetic = getRandomInt(1, 5)
+        }
+        arithmeticActual = arithmetic
+        var symbol
+        switch (arithmetic) {
+            case 1: symbol = "+"; break;
+            case 2: symbol = "-"; break;
+            case 3: symbol = "*"; break;
+            case 4: symbol = "/"; break;
+        }
+        document.getElementById("question").innerText = "What is " + firstNum + " " + symbol + " " + secondNum + "?"
+    }
+    function randomResponse(isCorrect) {
+        var random = Math.floor(Math.random() * 4)
+        if (isCorrect) {
+            return correctAnswers[random]
+        } else {
+            return incorrectAnswers[random]
+        }
+    }
+    function calculateScore() {
+        var grade = (numCorrect / questionNo) * 100
+        if (grade < 75) {
+            alert("Please ask your instructor for extra help")
+        } else {
+            alert("Good job you passed")
+        }
+    }
+    function changeArithmetic(change) {
+        arithmetic = change
+        randomQuestion(change)
+    }
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+    }
+</script>
+
+<body>
+    <form method="POST">
+        <p id='question'></p>
+        <input type="number" id="answer">
+        <input type="button" onclick="checkAnswer()" value="Submit Answer">
+        <p id="result"></p>
+        <input type="button" onclick="changeArithmetic(1)" value="Addition">
+        <input type="button" onclick="changeArithmetic(2)" value="Subtraction">
+        <br><br>
+        <input type="button" onclick="changeArithmetic(3)" value="Multiplication">
+        <input type="button" onclick="changeArithmetic(4)" value="Division">
+        <br><br>
+        <input type="button" onclick="changeArithmetic(5)" value="All">
+    </form>
+</body>
+
+</html>

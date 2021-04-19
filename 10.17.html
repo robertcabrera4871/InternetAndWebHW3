@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>10.14</title>
+</head>
+<style type="text/css">
+    body {
+        position: relative;
+        border: 3px solid black;
+        padding-top: 18px;
+    }
+
+    .square {
+        height: 50px;
+        width: 50px;
+        border: 5px solid burlywood;
+        background-color: lightgreen;
+
+    }
+
+    .tort {
+        color: darkgreen;
+        font-size: 30px;
+        -webkit-text-stroke: 1px black;
+        margin-left: 5px;
+        position: absolute;
+        top: 0px;
+    }
+
+    /*60 px between each square*/
+    .hare {
+        color: darkred;
+        font-size: 30px;
+        -webkit-text-stroke: 1px black;
+        margin-left: 30px;
+        position: absolute;
+        top: 0px;
+    }
+
+    .alert {
+        color: red;
+        font-size: 350px;
+        position: absolute;
+        bottom: 2000px;
+        left: 1250px;
+        display: none;
+    }
+
+    button {
+        position: absolute;
+        top: 0px;
+        left: 100px;
+        width: 500px;
+        height: 250px;
+        font-size: 100px;
+    }
+</style>
+<script>
+    window.onload = drawTrack()
+
+    var tortPosition = 1
+    var harePosition = 1
+    var finishPosition = 70
+    var end = false
+
+    function drawTrack() {
+        for (var i = 0; i < 70; i++) {
+            document.writeln("<div class='square'></div>")
+        }
+    }
+    function startRace() {
+        // console.log(getComputedStyle(document.getElementById("hare"))
+        // .getPropertyValue('top').replace(/\D/g, ""))
+        // while (!end) {
+        //     calculateHare()
+        //     calculateTort()
+        // }
+    }
+    function calculateTort() {
+        var roll = Math.random()
+        if (roll > 0 && roll <= 0.5) {
+            tortPosition += 3
+        } else if (roll > 0.5 && roll <= 0.7) {
+            tortPosition -= 6;
+        } else {
+            tortPosition += 1;
+        }
+        updateHarePos()
+    }
+    function calculateHare() {
+        var roll = Math.random()
+        var change
+        if (roll > 0 && roll <= 0.2) {
+            change = 0
+        } else if (roll > 0.2 && roll <= 0.4) {
+            harePosition += 9;
+            change = 9
+        } else if(roll > 0.4 && roll <= 0.5) {
+            harePosition -= 12
+            change = -12
+        }else if(roll > 0.5 && roll <= 0.8) {
+            harePosition += 1
+            change = 1
+        }else {
+            harePosition -=2
+            change -2
+        }
+    
+        updateHarePos(change)
+    }
+    function updateHarePos(change) {
+        var current = parseInt(getComputedStyle(document.getElementById("hare"))
+         .getPropertyValue('top').replace(/\D/g, ""))
+         console.log(current)
+        // if (harePosition < 1) {
+        //     harePosition = 1
+        //     document.getElementById("hare").style.top = "0px"
+        // } else {
+        //     var newPos = curent + (change * 60)
+        //     //Maybe wont work
+        //     document.getElementById("hare").style.top = newPos + "px"
+        // }
+    }
+    function updateTortPos() {
+        // var current = parseInt(getComputedStyle(document.getElementById("tort"))
+        //  .getPropertyValue('top').replace(/\D/g, ""))
+        // if (tortPosition < 1) {
+        //     tortPosition = 1
+        //     document.getElementById("tort").style.top = "0px"
+        // }else {
+        //     var newPos = curent + (change * 60)
+        //     //Maybe wont work
+        //     document.getElementById("tort").style.top = newPos + "px"
+        // }
+    }
+</script>
+
+<body>
+    <button onclick="startRace()">Start Race</button>
+    <p class="tort" id="tort">T</p>
+    <p class="hare" id="hare">H</p>
+    <p class="alert">OUCH!</p>
+</body>
+
+</html>

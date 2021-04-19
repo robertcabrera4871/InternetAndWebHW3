@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>9.22</title>
+        <title>9.24</title>
     </head>
     <script>
         var correctAnswers = ["Very good!", "Excellent!", "Nice Work!", "Keep up the good Work!"]
@@ -12,10 +12,16 @@
         var secondNum = 0;
         var max  = 11;
         var numCorrect = 0;
-        var questionNo = 0;
+        var questionNo = 1;
         window.onload = randomQuestion
         
         function checkAnswer(){
+            console.log(questionNo)
+            if(questionNo == 10){
+                calculateScore()
+                numCorrect = 0
+                questionNo = 0
+            }
             var attempt = document.getElementById("answer").value
             var answer = firstNum * secondNum
             if(attempt == answer){
@@ -39,7 +45,14 @@
             } else{
                 return incorrectAnswers[random]
             }
-
+        }
+        function calculateScore(){
+            var grade = (numCorrect / questionNo) * 100
+            if(grade < 75){
+                alert("Please ask your instructor for extra help")
+            } else{
+                alert("Good job you passed")
+            }
         }
     </script>
     <body>
